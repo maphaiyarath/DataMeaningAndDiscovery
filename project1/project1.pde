@@ -1,67 +1,74 @@
-/*
-    Michelle Aphaiyarath
-    Project 1 --> parsing and visualizing unstructured data
-*/
+// Michelle Aphaiyarath
+// Project 1 - Parsing & Visualizing Unstructured Data
 
-BufferedReader reader;
 final String FILENAME = "data.txt";
-Letter[][] letter;
-int cols = 380;
-int rows = 380;
+final int LETTER_VIZ = 0;
+final int FREQ_VIZ = 1;
+final int ALPHA_LETTERS = 26;
+final int ASCII_OFFSET = 97;
+BufferedReader buffer;
+int state;
+PImage letterViz;
+int[] freqs = new int[ALPHA_LETTERS];
+color[] palette = new color[ALPHA_LETTERS];
 
-void setup()
-{
+void setup() {
   size (380, 380);
-  letter = new Letter[cols][rows];
-  readAndPrintOneCharacter();
-  for (int i = 0; i < cols; i++)
-  {
-    for (int j = 0; j < rows; j++)
-    {
-      letter[i][j] = new Letter (i, j, 1, 1);
-    }
-  }
-
+  state = LETTER_VIZ;
+  letterViz = createImage (380, 380, RGB);
+  prepFreqs();
+  letterViz.loadPixels();
 }
 
-void draw()
-{
+void draw() {
   background (0);
-  for (int i = 0; i < cols; i++)
-  {
-    for (int j = 0; j < rows; j++)
-    {
-      // assign color, i.e. int(random(255))
-      // letter[i][j] = color(100, 150, 200);
-      // letter[i][j].display();
-      stroke (100, 50, 0);
-      point (i, j);
-    }
+  if (state == LETTER_VIZ) {
+    drawLetters();
+  } else {
+    drawFreqs();
   }
-
-  // if uppercase, subtract 32 from ASCII to get lowercase 
 }
 
-void readAndPrintOneCharacter()
-{
-  reader = createReader (FILENAME);
-  try
-  {
-    int value = 0;
-    while ((value = reader.read()) != -1)
-    {
-      char character = (char) value;
-      println (character);
-    }
+void mousePressed() {
+  state = (state + 1) % 2;
+}
+
+void drawLetters() {
+  background (0);
+  text ("letters", width/2, height/2);
+}
+
+void drawFreqs() {
+  background (0);
+  text ("graph", width/2, height/2);
+}
+
+void prepFreqs() {
+  for (int i = 0; i < ALPHA_LETTERS; ++i) {
+    freqs[i] = 0;
   }
-  catch (IOException e)
-  {
+  buffer = createReader (FILENAME);
+  try {
+    int character;
+    int pixelPos = 0;
+    while ((character = buffer.read()) != -1) {
+      if (!Character.isAlphabetic (character)) {
+        continue;
+      }
+      char letter = (char) Character.toLowerCase (character);
+      freqs[letter - ASCII_OFFSET]++;
+      letterViz.pixels[pixelPos] = palette[letter - ASCII_OFFSET]++;
+      pixelPos++;
+    }
+    println (freqs);
+  } catch (IOException e) {
     println ("Error: Could not read data.");
     e.printStackTrace();
   }
 }
 
-void mousePressed()
-{
-  
-}
+// for every nth char i have, color nth pixel with nth color
+// loop over frequencies array
+// processing map function
+// to correctly present range of frequencies
+// loop through every element to see which is max
