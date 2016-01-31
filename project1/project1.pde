@@ -12,25 +12,21 @@ int state;
 PImage letterViz;
 int[] freqs = new int[ALPHA_LETTERS];
 color[] palette = new color[ALPHA_LETTERS];
-// HashMap <Integer, color> hm;
 
 void setup() {
   size (380, 380);
   state = LETTER_VIZ;
   letterViz = createImage (380, 380, RGB);
-  // hm = new HashMap <int, color>();
+  prepColors();
   prepFreqs();
   letterViz.loadPixels();
-  // prepColors();
   letterViz.updatePixels();
-  image (letterViz, 0, 0);
 }
 
 void draw() {
   background (0);
   if (state == LETTER_VIZ) {
     drawLetters();
-    // prepColors();
   } else {
     drawFreqs();
   }
@@ -41,8 +37,8 @@ void mousePressed() {
 }
 
 void drawLetters() {
-  background (0);
-  text ("letters", width/2, height/2);
+  background (255);
+  image (letterViz, 0, 0);
 }
 
 void drawFreqs() {
@@ -60,18 +56,19 @@ void prepFreqs() {
     int character;
     int pixelPos = 0;
     while ((character = buffer.read()) != -1) {
-      // ignores non-alpha characters
-      if (!Character.isAlphabetic (character)) {
-        continue;
+      if (Character.isAlphabetic (character)) {
+        // treats upper and lower case letters the same
+        char letter = (char) Character.toLowerCase (character);
+        freqs[letter - ASCII_OFFSET]++;
+        // consistently colorizes character occurrences
+        letterViz.pixels[pixelPos] = palette[letter - ASCII_OFFSET];
+      } else {
+        // ignores non-alpha characters
+        letterViz.pixels[pixelPos] = color (0);
       }
-      // treats upper and lower case letters the same
-      char letter = (char) Character.toLowerCase (character);
-      freqs[letter - ASCII_OFFSET]++;
-      // consistently colorizes character occurrences
-      letterViz.pixels[pixelPos] = palette[letter - ASCII_OFFSET]++;
       pixelPos++;
     }
-    println (freqs);
+    // println (freqs);
   } catch (IOException e) {
     println ("Error: Could not read data.");
     e.printStackTrace();
@@ -80,13 +77,14 @@ void prepFreqs() {
 
 void prepColors() {
   for (int i = 0; i < ALPHA_LETTERS; ++i) {
-    palette[i] = color (255, 0, 0);
+    palette[i] = color (random (255), random (255), random (255));
   }
 }
 
+// draws visual attention to occurrences of keyword (Alice)
+
 // build a string, compare to "Alice"
 // parse text as Strings
-
 // for every nth char i have, color nth pixel with nth color
 // loop over frequencies array
 // processing map function
