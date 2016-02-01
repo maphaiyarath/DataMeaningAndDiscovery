@@ -70,6 +70,8 @@ class Letter {
       e.printStackTrace();
     }
   }
+  
+  // for (int i = 0; i < 
 
   void prepColors() {
     for (int i = 0; i < ALPHA_LETTERS; ++i) {
@@ -84,7 +86,7 @@ class Letter {
       String line;
       int alicePixel = 0;
       while ((line = buffer2.readLine()) != null) {
-        String[] words = splitTokens (line, " )/:?;!(.'-,\"");
+        String[] words = splitTokens (line, " ():;?!.,'-/\"");
         for (int i = 0; i < words.length; i++) {
           if (words[i].equals ("Alice")) {
             // draws visual attention to occurrences of keyword
