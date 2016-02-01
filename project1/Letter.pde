@@ -28,7 +28,6 @@ class Letter {
         text (mx, 230, 45);
       }
       if (freqs[i] < min) {
-        // MIN NOT WORKING CORRECTLY
         min = freqs[i];
         fill (palette[i]);
         textAlign (LEFT, BOTTOM);
@@ -86,7 +85,6 @@ class Letter {
       int alicePixel = 0;
       while ((line = buffer2.readLine()) != null) {
         String[] words = splitTokens (line, " )/:?;!(.'-,\"");
-        // String[] words = line.split ("[a-zA-Z]+");
         for (int i = 0; i < words.length; i++) {
           if (words[i].equals ("Alice")) {
             // draws visual attention to occurrences of keyword
