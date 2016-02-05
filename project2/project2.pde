@@ -17,5 +17,6 @@ void draw() {
   for (int i = 0; i < WALKER_COUNT; i++) {
     walkers[i].drawWalker();
     walkers[i].walk();
+    walkers[i].applyForce (new PVector (-0.5, 0));
   }
 }
