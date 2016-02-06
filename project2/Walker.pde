@@ -3,21 +3,22 @@ class Walker {
   final int MAX_VEL = 1;
   PVector loc, vel, accel, tendency;
   int radius;
-  float xoff, var;
+  float xoff;
   
-  Walker (PVector loc) {
+  Walker (PVector loc, PVector tendency) {
     this.loc = loc;
+    this.tendency = tendency;
     vel = new PVector (0, 0);
     accel = new PVector (0, 0);
-    tendency = new PVector (1.5, 0);
+    tendency = new PVector (1.4, 0);
     radius = 20;
     xoff = 0.0;
-    var = 0;
   }
   
   void drawWalker() {
-    stroke (0);
-    fill (150, 60, 170);
+    stroke (255);
+    strokeWeight (5);
+    fill (0);
     ellipse (loc.x, loc.y, radius, radius);
   }
   
@@ -30,17 +31,11 @@ class Walker {
     xoff += NOISE_DELTA;
     if (loc.x < 0) loc.x = width;
     if (loc.x > width) loc.x = 0;
-    if (loc.y < 0) loc.y = height;
-    if (loc.y > height) loc.y = 0;
+    if (loc.y < 0) loc.y = 500;
+    if (loc.y > 500) loc.y = 0;
   }
   
   void applyForce (PVector v) {
     vel.add (v);
   }
 }
-
-/*
-xoff += 0.01;
-var = noise(xoff);
-var = map (loc.x, 0, 1, 0, width);
-*/
