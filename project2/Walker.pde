@@ -2,8 +2,9 @@ class Walker {
   final float NOISE_DELTA = 0.01;
   final int MAX_VEL = 1;
   PVector loc, vel, accel, tendency;
-  int radius;
+  int diameter;
   float xoff;
+  ArrayList<Prey> data = new ArrayList<Prey>();
   
   Walker (PVector loc, PVector tendency) {
     this.loc = loc;
@@ -11,15 +12,19 @@ class Walker {
     vel = new PVector (0, 0);
     accel = new PVector (0, 0);
     tendency = new PVector (1.4, 0);
-    radius = 20;
+    diameter = 20;
     xoff = 0.0;
   }
   
   void drawWalker() {
     stroke (255);
-    strokeWeight (5);
+    strokeWeight (4);
     fill (0);
-    ellipse (loc.x, loc.y, radius, radius);
+    ellipse (loc.x, loc.y, diameter, diameter);
+    for (Prey p : data) {
+      fill (p.c);
+      ellipse (p.loc.x, p.loc.y, p.diameter, p.diameter);
+    }
   }
   
   void walk() {
@@ -35,7 +40,13 @@ class Walker {
     if (loc.y > 500) loc.y = 0;
   }
   
-  void applyForce (PVector v) {
-    vel.add (v);
+  void eat (Prey p) {
+    data.add (p);
+    p.loc.x = random (250);
+    p.loc.y = random(height - 200, height);
+  }
+  
+  boolean isTouching (Prey p) {
+    return dist (loc.x, loc.y, p.loc.x, p.loc.y) < (diameter / 2 + p.diameter / 2);
   }
 }
