@@ -11,7 +11,7 @@ class Walker {
     this.tendency = tendency;
     vel = new PVector (0, 0);
     accel = new PVector (0, 0);
-    tendency = new PVector (1.4, 0);
+    tendency = new PVector (0, 0);
     diameter = 20;
     xoff = 0.0;
   }
@@ -22,8 +22,9 @@ class Walker {
     fill (0);
     ellipse (loc.x, loc.y, diameter, diameter);
     for (Prey p : data) {
+      strokeWeight (2);
       fill (p.c);
-      ellipse (p.loc.x, p.loc.y, p.diameter, p.diameter);
+      ellipse (p.loc.x, p.loc.y, 8, 8);
     }
   }
   
@@ -36,14 +37,14 @@ class Walker {
     xoff += NOISE_DELTA;
     if (loc.x < 0) loc.x = width;
     if (loc.x > width) loc.x = 0;
-    if (loc.y < 0) loc.y = 500;
-    if (loc.y > 500) loc.y = 0;
+    if (loc.y < 0) loc.y = 500 - diameter / 2;
+    if (loc.y > 500 - diameter / 2) loc.y = 0;
   }
   
   void eat (Prey p) {
     data.add (p);
-    p.loc.x = random (250);
-    p.loc.y = random(height - 200, height);
+    p.loc.x = random (246);
+    p.loc.y = random (height - 250, height - 4);
   }
   
   boolean isTouching (Prey p) {
