@@ -22,6 +22,8 @@ class Walker {
     strokeWeight (4);
     fill (247, 202, 201);
     ellipse (loc.x, loc.y, diameter, diameter);
+    
+    // draw eaten prey for state visualization
     for (Prey p : data) {
       stroke (255);
       strokeWeight (2);
@@ -44,12 +46,14 @@ class Walker {
   }
   
   void eat (Prey p) {
+    // if in add section, inc. element count and move prey to state vizualization
     if ((p.loc.x < 251) || ((p.loc.x > 500) && (p.loc.x < 751))) {
       count++;
       data.add (p);
       p.loc.x = random (246);
       p.loc.y = random (height - 250, height - 4);
     } else {
+      // decrease count
       if (count > 0) {
         count--;
       }

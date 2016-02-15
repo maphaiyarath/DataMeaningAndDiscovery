@@ -20,6 +20,7 @@ class Queue extends Walker {
   }
   
   void eat (Prey p) {
+    // add -> inc. element count and append eaten prey to tail of queue
     if ((p.loc.x < 251) || ((p.loc.x > 500) && (p.loc.x < 751))) {
       count++;
       data.add (p);
@@ -27,6 +28,7 @@ class Queue extends Walker {
       p.loc.y = 625;
       xLoc += 8;
     } else {
+      // delete -> dec. count and delete if color of most recently eaten prey matches head of queue
       if (count > 0) {
         count--;
       }

@@ -2,13 +2,12 @@
 // Project 2 - Data Structure Safari & Adventures in Algorithms
 
 final int PREY_COUNT = 100;
-final int COLOR_COUNT = 5;
+final int COLOR_COUNT = 10;
 Baggins bag;
 Stack stack;
 Queue q;
 Tree tree;
 Text text;
-PVector loc, tendency;
 ArrayList<Prey> prey = new ArrayList<Prey>();
 color[] palette = new color[COLOR_COUNT];
 
@@ -31,11 +30,7 @@ void setup() {
 
 void draw() {
   background (200, 170, 150);
-  for (int i = 1; i < 4; i++) {
-    stroke (190, 160, 140);
-    strokeWeight (3);
-    line (250 * i, 0, 250 * i, height);
-  }
+  text.drawDivisions();
   for (int i = prey.size() - 1; i >= 0; --i) {
     Prey p = prey.get(i);
     p.drawPrey();
@@ -73,9 +68,7 @@ void draw() {
   tree.printName();
   tree.printInfo();
   text.showText();
-  stroke (190, 160, 140);
-  strokeWeight (4);
-  line (0, 500, width, 500);
+  text.drawLine();
 }
 
 // set - unsorted, unordered, unique?

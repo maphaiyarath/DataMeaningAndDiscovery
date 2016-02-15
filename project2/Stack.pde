@@ -20,14 +20,15 @@ class Stack extends Walker {
   }
     
   void eat (Prey p) {
+    // if in add section, inc. element count and place next eaten prey on top of stack
     if ((p.loc.x < 251) || ((p.loc.x > 500) && (p.loc.x < 751))) {
       count++;
       data.add (p);
       p.loc.x = 625;
       p.loc.y = 742 - yLoc;
       yLoc += 8;
-      // subtract location by 8 after each iteration
     } else {
+      // delete section -> decrease count if color of most recently eaten prey matches color on top
       if (count > 0) {
         count--;
       }
