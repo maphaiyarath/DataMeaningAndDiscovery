@@ -2,7 +2,7 @@ class Walker {
   final float NOISE_DELTA = 0.01;
   final int MAX_VEL = 1;
   PVector loc, vel, accel, tendency;
-  int diameter;
+  int count, diameter;
   float xoff;
   ArrayList<Prey> data = new ArrayList<Prey>();
   
@@ -12,6 +12,7 @@ class Walker {
     vel = new PVector (0, 0);
     accel = new PVector (0, 0);
     tendency = new PVector (0, 0);
+    count = 0;
     diameter = 20;
     xoff = 0.0;
   }
