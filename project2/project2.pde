@@ -1,17 +1,21 @@
 // Michelle Aphaiyarath
 // Project 2 - Data Structure Safari & Adventures in Algorithms
 
-final int PREY_COUNT = 75;
+final int PREY_COUNT = 80;
 final int COLOR_COUNT = 5;
 Baggins bag;
-PFont font;
+Stack stack;
+Queue q;
+Text text;
 ArrayList<Prey> prey = new ArrayList<Prey>();
 color[] palette = new color[COLOR_COUNT];
 
 void setup() {
   size (1000, 750);
-  font = createFont ("Futura-Medium", 12);
   bag = new Baggins (new PVector (20, random (500)), new PVector (random (-0.1, 5), random (-1, 1)));
+  stack = new Stack (new PVector (20, random (500)), new PVector (random (-0.1, 5), random (-1, 1)));
+  q = new Queue (new PVector (20, random (500)), new PVector (random (-0.1, 5), random (-1, 1)));
+  text = new Text();
   for (int i = 0; i < COLOR_COUNT; i++) {
     palette[i] = color (random (255), random (255), random (255));
   }
@@ -39,38 +43,27 @@ void draw() {
   }
   bag.drawWalker();
   bag.walk();
+  bag.printName();
+  stack.drawWalker();
+  stack.walk();
+  q.drawWalker();
+  q.walk();
+  text.showText();
   stroke (190, 160, 140);
   strokeWeight (4);
   line (0, 500, width, 500);
-  fill (120, 90, 70);
-  textFont (font);
-  textAlign (CENTER, CENTER);
-  text ("BAG", 125, 510);
-  text ("SET", 375, 510);
-  text ("QUEUE", 625, 510);
-  text ("STACK", 875, 510);
-  for (int i = 0; i < 4; i++) {
-    textAlign (LEFT, BOTTOM);
-    String elementCount = "ELEMENTS: " + bag.count;
-    text (elementCount, 250 * i + 10, 725);
-    textAlign (LEFT, TOP);
-    text ("CAPACITY: ", 250 * i + 10, 725);
-  }
-  for (int i = 0; i < 2; i++) {
-    textAlign (CENTER, CENTER);
-    text ("ADD", 500 * i + 125, 10);
-    text ("DELETE", 500 * i + 375, 10);
-  }
+  bag.printInfo();
+  stack.printInfo();
 }
 
 // set - unsorted, unordered, unique?
 // inheritance for dif data structures?
 
-// (10) displays at least 4 data structures that move over time
-// (5) zones properly support logic of adding / deleting data from structures
-// (20) adding / deleting data to / from structures adheres to properties of that structure
-// (10) appropriate search algorithms used before adding / deleting data
-// (10) "state" illustrations communicate distinguishing aspects of each structure
+// (7.5) displays at least 4 data structures that move over time
+// (3.75) zones properly support logic of adding / deleting data from structures
+// (15) adding / deleting data to / from structures adheres to properties of that structure
+// (7.5) appropriate search algorithms used before adding / deleting data
+// (7.5) "state" illustrations communicate distinguishing aspects of each structure
 
 // tree
 // do you have a 7

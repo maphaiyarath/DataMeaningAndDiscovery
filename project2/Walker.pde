@@ -20,7 +20,7 @@ class Walker {
   void drawWalker() {
     stroke (255);
     strokeWeight (4);
-    fill (0);
+    fill (255);
     ellipse (loc.x, loc.y, diameter, diameter);
     for (Prey p : data) {
       strokeWeight (2);
@@ -49,8 +49,11 @@ class Walker {
       p.loc.x = random (246);
       p.loc.y = random (height - 250, height - 4);
     } else {
-      count--;
+      if (count > 0) {
+        count--;
+      }
       data.remove (p);
+      // delete data from structure
     }
   }
   
