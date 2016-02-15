@@ -43,9 +43,15 @@ class Walker {
   }
   
   void eat (Prey p) {
-    data.add (p);
-    p.loc.x = random (246);
-    p.loc.y = random (height - 250, height - 4);
+    if ((p.loc.x < 251) || ((p.loc.x > 500) && (p.loc.x < 751))) {
+      count++;
+      data.add (p);
+      p.loc.x = random (246);
+      p.loc.y = random (height - 250, height - 4);
+    } else {
+      count--;
+      data.remove (p);
+    }
   }
   
   boolean isTouching (Prey p) {

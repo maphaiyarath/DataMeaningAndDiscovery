@@ -3,21 +3,15 @@
 
 final int PREY_COUNT = 75;
 final int COLOR_COUNT = 5;
-Walker bag;
+Baggins bag;
 PFont font;
-// ArrayList<Walker> bags = new ArrayList<Walker>();
 ArrayList<Prey> prey = new ArrayList<Prey>();
 color[] palette = new color[COLOR_COUNT];
 
 void setup() {
   size (1000, 750);
   font = createFont ("Futura-Medium", 12);
-  bag = new Walker (new PVector (20, random (500)), new PVector (random (-0.1, 5), random (-1, 1)));
-  /*
-  for (int i = 0; i < BAG_COUNT; i++) {
-    bags.add (new Walker (new PVector (20, random (500)), new PVector (random (-0.1, 5), random (-1, 1))));
-  }
-  */
+  bag = new Baggins (new PVector (20, random (500)), new PVector (random (-0.1, 5), random (-1, 1)));
   for (int i = 0; i < COLOR_COUNT; i++) {
     palette[i] = color (random (255), random (255), random (255));
   }
@@ -45,13 +39,6 @@ void draw() {
   }
   bag.drawWalker();
   bag.walk();
-  /*
-  for (int i = 0; i < bags.size(); i++) {
-    Walker w = bags.get(i);
-    w.drawWalker();
-    w.walk();
-  }
-  */
   stroke (190, 160, 140);
   strokeWeight (4);
   line (0, 500, width, 500);
