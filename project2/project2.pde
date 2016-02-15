@@ -1,12 +1,14 @@
 // Michelle Aphaiyarath
 // Project 2 - Data Structure Safari & Adventures in Algorithms
 
-final int PREY_COUNT = 80;
+final int PREY_COUNT = 100;
 final int COLOR_COUNT = 5;
 Baggins bag;
 Stack stack;
 Queue q;
+Tree tree;
 Text text;
+PVector loc, tendency;
 ArrayList<Prey> prey = new ArrayList<Prey>();
 color[] palette = new color[COLOR_COUNT];
 
@@ -15,6 +17,7 @@ void setup() {
   bag = new Baggins (new PVector (20, random (500)), new PVector (random (-0.1, 5), random (-1, 1)));
   stack = new Stack (new PVector (20, random (500)), new PVector (random (-0.1, 5), random (-1, 1)));
   q = new Queue (new PVector (20, random (500)), new PVector (random (-0.1, 5), random (-1, 1)));
+  tree = new Tree (new PVector (20, random (500)), new PVector (random (-0.1, 5), random (-1, 1)));
   text = new Text();
   for (int i = 0; i < COLOR_COUNT; i++) {
     palette[i] = color (random (255), random (255), random (255));
@@ -40,28 +43,45 @@ void draw() {
       bag.eat (p);
       prey.remove (p);
     }
+    if (q.isTouching (p)) {
+      q.eat (p);
+      prey.remove (p);
+    }
+    if (stack.isTouching (p)) {
+      stack.eat (p);
+      prey.remove (p);
+    }
+    if (tree.isTouching (p)) {
+      tree.eat (p);
+      prey.remove (p);
+    }
   }
   bag.drawWalker();
   bag.walk();
   bag.printName();
+  bag.printInfo();
   stack.drawWalker();
   stack.walk();
+  stack.printName();
+  stack.printInfo();
   q.drawWalker();
   q.walk();
+  q.printName();
+  q.printInfo();
+  tree.drawWalker();
+  tree.walk();
+  tree.printName();
+  tree.printInfo();
   text.showText();
   stroke (190, 160, 140);
   strokeWeight (4);
   line (0, 500, width, 500);
-  bag.printInfo();
-  stack.printInfo();
 }
 
 // set - unsorted, unordered, unique?
-// inheritance for dif data structures?
 
-// (7.5) displays at least 4 data structures that move over time
 // (3.75) zones properly support logic of adding / deleting data from structures
-// (15) adding / deleting data to / from structures adheres to properties of that structure
+// (12.5) deleting data from structures adheres to properties of that structure
 // (7.5) appropriate search algorithms used before adding / deleting data
 // (7.5) "state" illustrations communicate distinguishing aspects of each structure
 

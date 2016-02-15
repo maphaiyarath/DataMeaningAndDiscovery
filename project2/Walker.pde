@@ -18,11 +18,12 @@ class Walker {
   }
   
   void drawWalker() {
-    stroke (255);
+    stroke (146, 168, 209);
     strokeWeight (4);
-    fill (255);
+    fill (247, 202, 201);
     ellipse (loc.x, loc.y, diameter, diameter);
     for (Prey p : data) {
+      stroke (255);
       strokeWeight (2);
       fill (p.c);
       ellipse (p.loc.x, p.loc.y, 8, 8);

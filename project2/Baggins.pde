@@ -3,7 +3,7 @@ class Baggins extends Walker {
   
   Baggins (PVector loc, PVector tendency) {
     super (loc, tendency);
-    capacity = 20;
+    capacity = 25;
   }
   
   void printName() {

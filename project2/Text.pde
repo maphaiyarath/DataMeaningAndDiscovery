@@ -10,9 +10,9 @@ class Text {
     textFont (font);
     textAlign (CENTER, CENTER);
     text ("BAG", 125, 510);
-    text ("SET", 375, 510);
-    text ("QUEUE", 625, 510);
-    text ("STACK", 875, 510);
+    text ("QUEUE", 375, 510);
+    text ("STACK", 625, 510);
+    text ("TREE", 875, 510);
     for (int i = 0; i < 2; i++) {
       textAlign (CENTER, CENTER);
       text ("ADD", 500 * i + 125, 10);
