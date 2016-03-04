@@ -1,3 +1,5 @@
+// posted to GitHub & demonstrates commit history of work
+
 final String URL = "...";
 JSONObject demograph, museum;
 PImage map;
@@ -5,7 +7,7 @@ String event;
 
 void setup() {
   size (1131, 742);
-  map = loadImage ("map.png");
+  map = loadImage ("us_map.png");
   
 }
 
