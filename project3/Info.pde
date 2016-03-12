@@ -2,7 +2,6 @@
 class Info {
   // uses appropriate data structures for internally managing data
   ArrayList<HashMap<String, String>> percentageInfo;
-  color berry;
   float p, percentScale, yearScale;
   HashMap<String, String> hm;
   int border;
@@ -15,7 +14,6 @@ class Info {
   Info() {
     percentageInfo = new ArrayList<HashMap<String, String>>();
     hm = new HashMap<String, String>();
-    berry = color (175, 110, 120);
     border = 100;
   }
   
@@ -45,7 +43,7 @@ class Info {
     }
   }
   
-  void drawData() {
+  void drawData (color c) {
     for (int i = 0; i < percentageInfo.size(); i++) {
       hm = percentageInfo.get(i);
       
@@ -59,9 +57,11 @@ class Info {
       
       // displays viz of data
       noStroke();
-      fill (berry);
-      rect (yearScale, percentScale, 5, 5);
+      fill (c);
+      rectMode (CENTER);
+      rect (yearScale, percentScale, 10, 10);
       
+      println (percentScale);
       // why is it only printing / drawing last value over & over,
       // instead of the 9 dif points?
       // println ((i + 1) + " - " + year + " - " + percent);
