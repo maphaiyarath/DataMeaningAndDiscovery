@@ -1,6 +1,8 @@
 // Michelle Aphaiyarath
 // Project 3 -> Consuming Structured Data
-// visualizing income distribution in the US
+//           -> visualizing income distribution in the US
+
+// http://knoema.com/WBWDIGDF2015Dec/world-development-indicators-wdi-december-2015
 
 // uses at least 2 distinct data sets
 final String low10 = "http://knoema.com/api/1.0/data/WBWDIGDF2015Dec?Time=1986-2015&country=1001620&series=1011820&Frequencies=A";

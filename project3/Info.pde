@@ -37,10 +37,10 @@ class Info {
       
       hm.put ("Time", year);
       hm.put ("Value", percent);
-      percentageInfo.add (hm);
       
       println ((i + 1) + " - " + year + " - " + percent);
     }
+    percentageInfo.add (hm);
   }
   
   void drawData (color c) {
@@ -61,7 +61,6 @@ class Info {
       rectMode (CENTER);
       rect (yearScale, percentScale, 10, 10);
       
-      println (percentScale);
       // why is it only printing / drawing last value over & over,
       // instead of the 9 dif points?
       // println ((i + 1) + " - " + year + " - " + percent);

@@ -2,7 +2,7 @@ class Graph {
   color dark, rouge;
   int border;
   PFont font;
-  String yRange;
+  String xRange, yRange;
   
   Graph() {
     dark = color (70, 30, 40);
@@ -30,6 +30,16 @@ class Graph {
       stroke (0, 50);
       line (border, border + 14.29 * i, width - border, border + 14.29 * i);
       
+    }
+    for (int j = 0; j <= 30; j++) {
+      textAlign (CENTER, TOP);
+      textSize (12);
+      fill (rouge);
+      int temp = j + 1985;
+      String xRange = str (temp);
+      if (temp % 5 == 0) {
+        text (xRange, border + 16.67 * j, height - border + 5);
+      }
     }
   }
   
