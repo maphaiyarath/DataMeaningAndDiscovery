@@ -9,9 +9,17 @@ SQL_SELECT_GENRES = "SELECT name FROM genres;"
 # correctly configures, connects & disconnects from DB
 db = SQLite3::Database.new(DB_FILE_NAME)
 
-db.execute(SQL_SELECT_GENRES) do |row|
-	puts row
-end
+puts "Welcome to the music database!"
+puts "	1. Display all song information."
+puts "	2. Add a new genre."
+puts "	3. Add a new album."
+puts "	4. Add a new artist."
+puts "	5. Add a new song."
+puts "Enter a choice: "
+
+#db.execute(SQL_SELECT_GENRES) do |row|
+#	puts row
+#end
 
 db.close
 
