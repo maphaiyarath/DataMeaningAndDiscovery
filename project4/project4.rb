@@ -15,11 +15,28 @@ puts "	2. Add a new genre."
 puts "	3. Add a new album."
 puts "	4. Add a new artist."
 puts "	5. Add a new song."
-puts "Enter a choice: "
+print "Enter a choice: "
+user_input = gets.chomp
 
-#db.execute(SQL_SELECT_GENRES) do |row|
-#	puts row
-#end
+case user_input
+when '1.'
+	#
+when '2.'
+	puts "Genres in the database:"
+	db.execute(SQL_SELECT_GENRES) do |row|
+		puts row
+	end
+	print "New genre name: "
+	new_genre = gets.chomp
+when '3.'
+	#
+when '4.'
+	#
+when '5.'
+	#
+else
+	puts "Please choose an option from 1. to 5., thanks!"
+end
 
 db.close
 
