@@ -4,8 +4,7 @@
 require 'sqlite3'
 
 DB_FILE_NAME = "songs.sqlite3.db"
-SQL_SCHEMA = "SELECT songs.name, albums.name, artists.name, genres.name FROM songs, albums, artists, genres;"
-# WHERE songs.id = albums.song_id = artists.song_id = genres.song_id;"
+SQL_SCHEMA = "SELECT songs.name, genres.name, artists.name, albums.name FROM songs, genres, artists, albums WHERE artists.id = albums.artist_id AND genres.id = songs.genre_id AND albums.id = songs.album_id;"
 SQL_SELECT_GENRES = "SELECT name FROM genres;"
 SQL_SELECT_ALBUMS = "SELECT name FROM albums;"
 SQL_SELECT_ARTISTS = "SELECT name FROM artists;"
@@ -28,11 +27,10 @@ user_input = gets.chomp
 
 case user_input
 when '1'
-
-	# how to do id stuff so u can correctly print info???
-	
+	# lists all songs, albums, artists & genres
+	puts "[song name] | [genre] | [artist] | [album]"
 	db.execute(SQL_SCHEMA) do |row|
-		puts row
+		puts row.join " | "
 	end
 when '2'
 	# enables user to add new genre name
@@ -64,9 +62,6 @@ when '3'
 	artist_id_col = "INSERT INTO albums (name, artist_id) VALUES ('#{new_album}', '#{album_artist}');"
 	db.execute(artist_id_col)
 
-	# what if artist doesn't exist yet?
-	# how to show artist name?
-
 when '4'
 	# enables user to add new artist name
 	puts "Artists in the database:"
@@ -82,6 +77,7 @@ when '4'
 		puts row
 	end
 when '5'
+	# enables user to add new song, per spec
 	puts "Add a new song!"
 	print "Song name: "
 	new_song = gets.chomp
@@ -107,10 +103,6 @@ when '5'
 
 	song_entry = "INSERT INTO songs (name, genre_id, album_id) VALUES ('#{new_song}', '#{song_genre}', '#{song_album}');"
 	db.execute(song_entry)
-
-	# no artist_id...
-	# do we have to add artist if album is already associated with artist?
-
 else
 	puts "Please choose an option from 1. to 5., thanks!"
 	print "Enter a choice... again: "
@@ -119,14 +111,20 @@ end
 
 db.close
 
+# 1
+# how to do id stuff so u can correctly print info???
+# what if there's info missing (not displaying all songs b/c conditions too specific)?
+
+# 3
 # what if artist doesn't exist yet when entering album?
+# how to show artist name?
 
-# new song: do we need to explicitly add artist if album is already associated with artist?
+# 5 - new song
+# no artist_id...
+# do we have to explicitly add artist if album is already associated with artist?
+# what if album doesn't exist yet?
 
-# lists all songs, albums, artists & genres
-# enables user to add new song, per spec
 # leverages appropriate OOP
-
 # how to make OOP: make functions?
 
 
