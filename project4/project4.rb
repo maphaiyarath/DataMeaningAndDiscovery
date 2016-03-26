@@ -28,7 +28,9 @@ user_input = gets.chomp
 case user_input
 when '1'
 	# lists all songs, albums, artists & genres
+	# assuming each song entry is completely filled out, then it'll display all songs...
 	puts "[song name] | [genre] | [artist] | [album]"
+	puts "=========================================="
 	db.execute(SQL_SCHEMA) do |row|
 		puts row.join " | "
 	end
@@ -43,6 +45,7 @@ when '2'
 	genres_table = "INSERT INTO genres (name) VALUES ('#{new_genre}');"
 	db.execute(genres_table)
 	puts "UPDATED!"
+	puts "========"
 	db.execute(SQL_SELECT_GENRES) do |row|
 		puts row
 	end
@@ -57,7 +60,7 @@ when '3'
 	db.execute (SQL_ARTISTS_TABLE) do |row|
 		puts "#{row[0]}. #{row[1]}"
 	end
-	print "Select an artist: "
+	print "Select an artist's id: "
 	album_artist = gets.chomp
 	artist_id_col = "INSERT INTO albums (name, artist_id) VALUES ('#{new_album}', '#{album_artist}');"
 	db.execute(artist_id_col)
@@ -73,6 +76,7 @@ when '4'
 	artists_table = "INSERT INTO artists (name) VALUES ('#{new_artist}');"
 	db.execute(artists_table)
 	puts "UPDATED!"
+	puts "========"
 	db.execute(SQL_SELECT_ARTISTS) do |row|
 		puts row
 	end
@@ -111,28 +115,19 @@ end
 
 db.close
 
-# 1
-# how to do id stuff so u can correctly print info???
-# what if there's info missing (not displaying all songs b/c conditions too specific)?
-
 # 3
 # what if artist doesn't exist yet when entering album?
-# how to show artist name?
+# how to print artist name?
 
 # 5 - new song
 # no artist_id...
 # do we have to explicitly add artist if album is already associated with artist?
 # what if album doesn't exist yet?
 
+# else
+# how to go back to case statement
+
+# or - typing in either id or artist
+
 # leverages appropriate OOP
 # how to make OOP: make functions?
-
-
-
-
-
-
-
-
-
-
