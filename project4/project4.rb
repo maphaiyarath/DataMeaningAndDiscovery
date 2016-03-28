@@ -19,7 +19,7 @@ db = SQLite3::Database.new(DB_FILE_NAME)
 puts "Welcome to the music database!"
 puts "	1. Display all song information."
 puts "	2. Add a new genre."
-puts "	3. Add a new album (to an existing artist)."
+puts "	3. Add a new album."
 puts "	4. Add a new artist."
 puts "	5. Add a new song."
 print "Enter a choice: "
@@ -37,6 +37,7 @@ when '1'
 when '2'
 	# enables user to add new genre name
 	puts "Genres in the database:"
+	puts "======================="
 	db.execute(SQL_SELECT_GENRES) do |row|
 		puts row
 	end
@@ -52,11 +53,15 @@ when '2'
 when '3'
 	# enables user to add new album name
 	puts "Albums in the database:"
+	puts "======================="
 	db.execute(SQL_SELECT_ALBUMS) do |row|
 		puts row
 	end
+	# what if artist does not exist in DB yet before adding album...
 	print "New album name: "
 	new_album = gets.chomp
+	puts "Artists in the database:"
+	puts "========================"
 	db.execute (SQL_ARTISTS_TABLE) do |row|
 		puts "#{row[0]}. #{row[1]}"
 	end
@@ -64,10 +69,10 @@ when '3'
 	album_artist = gets.chomp
 	artist_id_col = "INSERT INTO albums (name, artist_id) VALUES ('#{new_album}', '#{album_artist}');"
 	db.execute(artist_id_col)
-
 when '4'
 	# enables user to add new artist name
 	puts "Artists in the database:"
+	puts "========================"
 	db.execute(SQL_SELECT_ARTISTS) do |row|
 		puts row
 	end
@@ -83,51 +88,30 @@ when '4'
 when '5'
 	# enables user to add new song, per spec
 	puts "Add a new song!"
-	print "Song name: "
+	print "New song name (to an existing album in the DB): "
 	new_song = gets.chomp
 	puts "Genres:"
+	puts "======="
 	db.execute (SQL_GENRES_TABLE) do |row|
 		puts "#{row[0]}. #{row[1]}"
 	end
-	print "Select a genre: "
+	print "Select a genre's id: "
 	song_genre = gets.chomp
 	puts "Albums:"
+	puts "======="
 	db.execute (SQL_ALBUMS_TABLE) do |row|
 		puts "#{row[0]}. #{row[1]}"
 	end
-	print "Select an album: "
+	print "Select an album's id: "
 	song_album = gets.chomp
-
-	#puts "Artists:"
-	#db.execute (SQL_ARTISTS_TABLE) do |row|
-	#	puts "#{row[0]}. #{row[1]}"
-	#end
-	#print "Select an artist: "
-	#song_artist = gets.chomp
-
 	song_entry = "INSERT INTO songs (name, genre_id, album_id) VALUES ('#{new_song}', '#{song_genre}', '#{song_album}');"
 	db.execute(song_entry)
 else
-	puts "Please choose an option from 1. to 5., thanks!"
-	print "Enter a choice... again: "
-	user_input = gets.chomp
+	puts "Sorry, please choose an option from 1 to 5, thanks!"
+	# how to do input again...
 end
 
 db.close
 
-# 3
-# what if artist doesn't exist yet when entering album?
-# how to print artist name?
 
-# 5 - new song
-# no artist_id...
-# do we have to explicitly add artist if album is already associated with artist?
-# what if album doesn't exist yet?
 
-# else
-# how to go back to case statement
-
-# or - typing in either id or artist
-
-# leverages appropriate OOP
-# how to make OOP: make functions?
