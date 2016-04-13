@@ -1,1 +1,1 @@
-alert('Welcome to our data viz!');
+alert('Welcome to Michelle and Jacquie\'s data viz!');
